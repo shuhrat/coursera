@@ -5,9 +5,10 @@
 
 using namespace std;
 
+
 int main() {
     int operations = 0;
-    int month = 0;
+    int counter = 0;
 
     vector<int> months = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     map<int, vector<string>> todo;
@@ -29,8 +30,9 @@ int main() {
         }
 
         if (operation == "NEXT") {
-            int days_in_current_month = months[(month % 12)];
-            int days_in_next_month = months[((month+1) % 12)];
+            int month = counter % 12;
+            int days_in_current_month = months[month];
+            int days_in_next_month = months[month + 1];
 
             if (days_in_current_month > days_in_next_month) {
                 while (days_in_current_month > days_in_next_month) {
@@ -41,8 +43,7 @@ int main() {
                     days_in_current_month--;
                 }
             }
-
-            month++;
+            counter++;
         }
 
         if (operation == "DUMP") {
@@ -50,9 +51,9 @@ int main() {
 
             cin >> day;
 
-            cout << todo[day].size();
+            cout << todo[day].size() << " ";
             for(auto item: todo[day]) {
-                cout << " " << item;
+                cout << item << " ";
             }
             cout << endl;
         }
